@@ -1,0 +1,16 @@
+{
+  "name": "vue-loader-plugin",
+  "version": "1.0.0",
+  "description": "a rewrite of VueLoaderPlugin to solve the compatibility with webpack5",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "keywords": [
+    "vue-loader",
+    "webpack5",
+    "ruleset"
+  ],
+  "author": "Ivan liu",
+  "license": "ISC"
+}
