@@ -91,9 +91,10 @@ class VueLoaderPlugin {
 
     // for each user rule (expect the vue rule), create a cloned rule
     // that targets the corresponding language blocks in *.vue files.
+    const refs = new Map()
     const clonedRules = rules
       .filter(r => r !== rawVueRules)
-      .map((rawRule) => cloneRule(rawRule, ruleSetCompiler))
+      .map((rawRule) => cloneRule(rawRule, ruleSetCompiler, refs))
 
     // fix conflict with config.loader and config.options when using config.use
     delete rawVueRules.loader;
@@ -123,10 +124,10 @@ class VueLoaderPlugin {
   }
 }
 
-function cloneRule (rawRule, ruleSetCompiler) {
-  const { rules } = ruleSetCompiler.compile([{
+function cloneRule (rawRule, ruleSetCompiler, refs) {
+  const rules = ruleSetCompiler.compileRules("ruleSet", [{
     rules: [rawRule]
-  }])
+  }], refs)
   let currentResource
 
   const res = Object.assign({}, rawRule, {
@@ -155,7 +156,7 @@ function cloneRule (rawRule, ruleSetCompiler) {
   delete res.test
 
   if (rawRule.oneOf) {
-    res.oneOf = rawRule.oneOf.map(rule => cloneRule(rule, ruleSetCompiler))
+    res.oneOf = rawRule.oneOf.map(rule => cloneRule(rule, ruleSetCompiler, refs))
   }
 
   return res
