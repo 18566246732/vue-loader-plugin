@@ -130,6 +130,18 @@ function cloneRule (rawRule, ruleSetCompiler, refs) {
   }], refs)
   let currentResource
 
+  const ruleUse = rules[0].rules
+    .map(rule => rule.effects
+      .filter(effect => effect.type === 'use')
+      .map(effect => effect.value)
+    )
+    .flat();
+    
+  // fix conflict with config.loader and config.options when using config.use
+  delete rawRule.loader;
+  delete rawRule.options;
+  rawRule.use = ruleUse;
+
   const res = Object.assign({}, rawRule, {
     resource: resources => {
       currentResource = resources
