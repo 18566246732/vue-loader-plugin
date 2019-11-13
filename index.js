@@ -97,7 +97,7 @@ class VueLoaderPlugin {
     // global pitcher (responsible for injecting template compiler loader & CSS
     // post loader)
     const pitcher = {
-      loader: require.resolve('./loaders/pitcher'),
+      loader: require.resolve('vue-loader/lib/loaders/pitcher'),
       resourceQuery: query => {
         const parsed = qs.parse(query.slice(1))
         return parsed.vue != null
