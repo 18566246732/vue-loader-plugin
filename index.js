@@ -38,8 +38,12 @@ class VueLoaderPlugin {
     let vueRules = []
 
     for (const rawRule of rules) {
+      // skip the `include` check when locating the vue rule
+      const clonedRawRule = Object.assign({}, rawRule)
+      delete clonedRawRule.include
+
       const ruleSet = ruleSetCompiler.compile([{
-        rules: [rawRule]
+        rules: [clonedRawRule]
       }])
       vueRules = ruleSet.exec({
         resource: 'foo.vue'
