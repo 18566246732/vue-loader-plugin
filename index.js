@@ -84,9 +84,9 @@ class VueLoaderPlugin {
     // make sure vue-loader options has a known ident so that we can share
     // options by reference in the template-loader by using a ref query like
     // template-loader??vue-loader-options
-    const vueLoaderUse = vueUse[vueLoaderUseIndex]
-    vueLoaderUse.ident = 'vue-loader-options'
-    vueLoaderUse.options = vueLoaderUse.options || {}
+    const rawVueLoaderUse = rawVueRules.use[vueLoaderUseIndex]
+    rawVueLoaderUse.ident = 'vue-loader-options'
+    rawVueLoaderUse.options = rawVueLoaderUse.options || {}
 
     // for each user rule (expect the vue rule), create a cloned rule
     // that targets the corresponding language blocks in *.vue files.
@@ -103,8 +103,8 @@ class VueLoaderPlugin {
         return parsed.vue != null
       },
       options: {
-        cacheDirectory: vueLoaderUse.options.cacheDirectory,
-        cacheIdentifier: vueLoaderUse.options.cacheIdentifier
+        cacheDirectory: rawVueLoaderUse.options.cacheDirectory,
+        cacheIdentifier: rawVueLoaderUse.options.cacheIdentifier
       }
     }
 
