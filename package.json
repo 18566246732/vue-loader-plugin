@@ -6,6 +6,10 @@
   "scripts": {
     "test": "npm run test"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/18566246732/vue-loader-plugin"
+  },
   "keywords": [
     "vue-loader",
     "webpack5",
