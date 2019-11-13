@@ -70,11 +70,6 @@ class VueLoaderPlugin {
     // get the normlized "use" for vue files
     const vueUse = vueRules.filter(rule => rule.type === 'use').map(rule => rule.value)
 
-    // fix conflict with config.loader and config.options when using config.use
-    delete rawVueRules.loader;
-    delete rawVueRules.options;
-    rawVueRules.use = vueUse;
-
     // get vue-loader options
     const vueLoaderUseIndex = vueUse.findIndex(u => {
       return /^vue-loader|(\/|\\|@)vue-loader/.test(u.loader)
@@ -99,6 +94,11 @@ class VueLoaderPlugin {
     const clonedRules = rules
       .filter(r => r !== rawVueRules)
       .map((rawRule) => cloneRule(rawRule, ruleSetCompiler))
+
+    // fix conflict with config.loader and config.options when using config.use
+    delete rawVueRules.loader;
+    delete rawVueRules.options;
+    rawVueRules.use = vueUse;
 
     // global pitcher (responsible for injecting template compiler loader & CSS
     // post loader)
