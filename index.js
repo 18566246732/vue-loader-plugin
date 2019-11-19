@@ -140,6 +140,10 @@ function cloneRule (rawRule, ruleSetCompiler, refs) {
       .map(effect => effect.value)
     )
     .flat();
+
+  const conditions = rules[0].rules
+    .map(rule => rule.conditions)
+    .flat();
     
   // fix conflict with config.loader and config.options when using config.use
   delete rawRule.loader;
@@ -156,11 +160,11 @@ function cloneRule (rawRule, ruleSetCompiler, refs) {
       if (parsed.vue == null) {
         return false
       }
-      if (rules[0].conditions && parsed.lang == null) {
+      if (!conditions || parsed.lang == null) {
         return false
       }
       const fakeResourcePath = `${currentResource}.${parsed.lang}`
-      for (const condition of rules[0].conditions) {
+      for (const condition of conditions) {
         if (condition && !condition.fn(fakeResourcePath)) {
           return false
         }
