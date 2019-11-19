@@ -1,6 +1,6 @@
 {
   "name": "vue-loader-plugin",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "a rewrite of VueLoaderPlugin to solve the compatibility with webpack5",
   "main": "index.js",
   "scripts": {
