@@ -160,7 +160,7 @@ function cloneRule (rawRule, ruleSetCompiler, refs) {
       if (parsed.vue == null) {
         return false
       }
-      if (!conditions || parsed.lang == null) {
+      if (!conditions) {
         return false
       }
       const fakeResourcePath = `${currentResource}.${parsed.lang}`
