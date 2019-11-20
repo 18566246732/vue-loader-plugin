@@ -165,7 +165,9 @@ function cloneRule (rawRule, ruleSetCompiler, refs) {
       }
       const fakeResourcePath = `${currentResource}.${parsed.lang}`
       for (const condition of conditions) {
-        if (condition && !condition.fn(fakeResourcePath)) {
+        // add support for resourceQuery
+        const request = condition.property === 'resourceQuery' ? query : fakeResourcePath;
+        if (condition && !condition.fn(request)) {
           return false
         }
       }
