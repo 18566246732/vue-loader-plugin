@@ -152,11 +152,6 @@ function cloneRule (rawRule, ruleSetCompiler, refs) {
     delete rawRule.options
     rawRule.use = ruleUse
   }
-    
-  // fix conflict with config.loader and config.options when using config.use
-  delete rawRule.loader;
-  delete rawRule.options;
-  rawRule.use = ruleUse;
 
   const res = Object.assign({}, rawRule, {
     resource: resources => {
